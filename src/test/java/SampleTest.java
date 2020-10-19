@@ -1,14 +1,12 @@
 import config.ServerConfig;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.aeonbits.owner.ConfigFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 
 public class SampleTest {
@@ -16,11 +14,16 @@ public class SampleTest {
     private static WebDriver driver;
     private Logger logger = LogManager.getLogger(SampleTest.class);
     private ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
+    //private String browserName = System.getProperty("Dbrowser");
 
-    @Before
+    @BeforeMethod
     public void setUp() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        String browserName = System.getProperty("browser");
+        //if (browserName == null) {
+         //   browserName = "Chrome";
+       // }
+
+        driver = WebDriverFactory.create(browserName);
         logger.info("Драйвер поднят");
     }
 
@@ -40,7 +43,7 @@ public class SampleTest {
 
     }
 
-    @After
+    @AfterMethod
     public void setDown() {
         if (driver != null) {
             driver.quit();
