@@ -4,6 +4,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 
 public class WebDriverFactory {
     public static WebDriver create(String webDriverName, Object options) {
@@ -17,6 +19,10 @@ public class WebDriverFactory {
 
             case FIREFOX:
                 return getFirefoxDriver((FirefoxOptions) options);
+
+
+            case IE:
+                return getInternetExplorerDriver((InternetExplorerOptions) options);
         }
         throw new IllegalArgumentException(String.format("%s is not supported", webDriverName));
     }
@@ -69,9 +75,30 @@ public class WebDriverFactory {
 
     }
 
+    private static InternetExplorerDriver getInternetExplorerDriver(InternetExplorerOptions options) {
+
+        InternetExplorerDriver driver;
+
+        WebDriverManager.iedriver().setup();
+
+        if (options == null) {
+
+            driver = new InternetExplorerDriver();
+
+        } else {
+            driver = new InternetExplorerDriver(options);
+        }
+
+
+        return driver;
+
+
+    }
+
     public enum WebDrivers {
         CHROME,
-        FIREFOX
+        FIREFOX,
+        IE
 
     }
 
