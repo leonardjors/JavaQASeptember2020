@@ -2,30 +2,59 @@ import config.ServerConfig;
 import org.aeonbits.owner.ConfigFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class SampleTest {
+
+
+
+
+
+
 
     private static WebDriver driver;
     private Logger logger = LogManager.getLogger(SampleTest.class);
     private ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
     //private String browserName = System.getProperty("Dbrowser");
 
-    @BeforeMethod
+    private static String parseBrowserName(String input) {
+        String result = null;
+        String pattern = "\\W*(\\w+)\\W*";
+        Pattern r = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
+        Matcher m = r.matcher(input);
+
+        if (m.matches()) {
+            result = m.group(1);
+        }
+
+        return result;
+
+
+    }
+
+    @Before
     public void setUp() {
-        String browserName = System.getProperty("browser");
-        //if (browserName == null) {
-         //   browserName = "Chrome";
-       // }
+        String browserName = parseBrowserName(System.getProperty("browser"));
+        System.out.println(browserName);
+
+        if (browserName == null) {
+            browserName = "Chrome";
+        }
+
+
 
         driver = WebDriverFactory.create(browserName);
         logger.info("Драйвер поднят");
     }
+
 
     @Test
     public void checkTitle() {
@@ -41,15 +70,21 @@ public class SampleTest {
         logger.info("Title страницы успешно валидирован");
 
 
+
+
     }
 
-    @AfterMethod
+    @After
     public void setDown() {
         if (driver != null) {
             driver.quit();
         }
     }
 }
+
+
+
+
 
 
 
