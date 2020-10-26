@@ -15,15 +15,10 @@ import java.util.regex.Pattern;
 public class SampleTest {
 
 
-
-
-
-
-
     private static WebDriver driver;
     private Logger logger = LogManager.getLogger(SampleTest.class);
     private ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
-    //private String browserName = System.getProperty("Dbrowser");
+
 
     private static String parseBrowserName(String input) {
         String result = null;
@@ -50,7 +45,6 @@ public class SampleTest {
         }
 
 
-
         driver = WebDriverFactory.create(browserName);
         logger.info("Драйвер поднят");
     }
@@ -68,8 +62,6 @@ public class SampleTest {
         Assert.assertEquals(cfg.expectedTitile(), actualTitle);
 
         logger.info("Title страницы успешно валидирован");
-
-
 
 
     }
