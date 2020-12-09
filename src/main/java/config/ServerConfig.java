@@ -12,6 +12,8 @@ public interface ServerConfig extends Config {
     @Key("expectedTitle")
     String expectedTitile();
 
+    @Key("yandexURL")
+    String yandexURL();
 
 
 
