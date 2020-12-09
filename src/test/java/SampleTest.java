@@ -8,9 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 
 public class SampleTest {
 
@@ -20,25 +17,12 @@ public class SampleTest {
     private ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
 
 
-    private static String parseBrowserName(String input) {
-        String result = null;
-        String pattern = "\\W*(\\w+)\\W*";
-        Pattern r = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
-        Matcher m = r.matcher(input);
 
-        if (m.matches()) {
-            result = m.group(1);
-        }
-
-        return result;
-
-
-    }
 
     @Before
     public void setUp() {
-        String browserName = parseBrowserName(System.getProperty("browser"));
-        System.out.println(browserName);
+        String browserName = System.getProperty("browser");
+
 
         if (browserName == null) {
             browserName = "Chrome";

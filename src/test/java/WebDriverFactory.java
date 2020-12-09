@@ -7,10 +7,13 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class WebDriverFactory {
     public static WebDriver create(String webDriverName, Object options) {
 
-        WebDrivers desiredDriver = WebDrivers.valueOf(webDriverName.toUpperCase());
+        WebDrivers desiredDriver = WebDrivers.valueOf(parseBrowserName(webDriverName).toUpperCase());
 
         switch (desiredDriver) {
 
@@ -99,6 +102,21 @@ public class WebDriverFactory {
         CHROME,
         FIREFOX,
         IE
+
+    }
+
+    private static String parseBrowserName(String input) {
+        String result = null;
+        String pattern = "\\W*(\\w+)\\W*";
+        Pattern r = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
+        Matcher m = r.matcher(input);
+
+        if (m.matches()) {
+            result = m.group(1);
+        }
+
+        return result;
+
 
     }
 
