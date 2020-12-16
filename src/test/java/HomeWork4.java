@@ -7,8 +7,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-
-
+import pages.*;
+import config.WebDriverFactory;
 
 public class HomeWork4 {
     private WebDriver driver;
@@ -20,12 +20,13 @@ public class HomeWork4 {
 
     public void setUp() {
         String browserName = System.getProperty("browser");
+
         System.out.println(browserName);
         if (browserName == null) {
             browserName = "Chrome";
         }
 
-        driver = WebDriverFactory.create(browserName);
+        driver = config.WebDriverFactory.create(browserName);
         logger.info("Драйвер поднят");
         driver.manage().window().maximize();
 

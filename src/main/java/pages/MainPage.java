@@ -1,3 +1,5 @@
+package pages;
+
 import config.ServerConfig;
 import org.aeonbits.owner.ConfigFactory;
 import org.apache.logging.log4j.LogManager;
@@ -5,7 +7,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -22,10 +23,10 @@ public class MainPage {
     By otusLoginAndRegisterLogo = By.cssSelector(".ic.new-ic-logo-with-text.new-log-reg__logo");
     By usernameField = By.cssSelector(".new-log-reg__login  form[method='post']  input[name='email']");
     By passwordField = By.cssSelector("input[name='password']");
-    By loginButton = By.cssSelector(".new-log-reg__login  form[method='post']  .new-button.new-button_blue.new-button_full.new-button_md0");
+    By loginButton = By.cssSelector(".new-input-line_relative button");
     By userLogo = By.cssSelector(".header2-menu__icon-img.ic-blog-default-avatar");
-    WebElement profileDropDown = driver.findElement(By.cssSelector(".header2-menu__item_dropdown_no-border"));
-    By myProfileElement = By.linkText("Bob Kiwi Мой профиль");
+    By profileDropDownSelector = By.cssSelector(".header2-menu__item_dropdown_no-border");
+    By myProfileElement = By.partialLinkText("Мой профиль");
 
     public MainPage(WebDriver driver) {
         this.driver = driver;
@@ -58,9 +59,10 @@ public class MainPage {
 
 
     public void openMyProfile() {
-        Actions action = new Actions(driver);
 
-        action.moveToElement(profileDropDown);
+
+        clickOnVisibleElement(profileDropDownSelector);
+
         waitElementIsDisplayed(myProfileElement);
         clickOnVisibleElement(myProfileElement);
 
