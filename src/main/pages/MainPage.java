@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -23,20 +24,24 @@ public class MainPage {
     By passwordField = By.cssSelector("input[name='password']");
     By loginButton = By.cssSelector(".new-log-reg__login  form[method='post']  .new-button.new-button_blue.new-button_full.new-button_md0");
     By userLogo = By.cssSelector(".header2-menu__icon-img.ic-blog-default-avatar");
+    WebElement profileDropDown = driver.findElement(By.cssSelector(".header2-menu__item_dropdown_no-border"));
+    By myProfileElement = By.linkText("Bob Kiwi Мой профиль");
 
     public MainPage(WebDriver driver) {
         this.driver = driver;
     }
 
 
-    public MainPage openMainPage() {
-        driver.get("baseURL");
+    public void openMainPage() {
+        driver.get(baseURL);
         waitElementIsDisplayed(otusMainPageLogo);
         logger.info("На главной странице OTUS");
+
+
     }
 
 
-    public MainPage loginUser(String username, String password) {
+    public void loginUser() {
         clickOnVisibleElement(loginAndRegisterButton);
         waitElementIsDisplayed(otusLoginAndRegisterLogo);
         logger.info("На форме регистрации и логина");
@@ -52,8 +57,12 @@ public class MainPage {
     }
 
 
-    public MyProfilePage openMyAccount() {
+    public void openMyProfile() {
+        Actions action = new Actions(driver);
 
+        action.moveToElement(profileDropDown);
+        waitElementIsDisplayed(myProfileElement);
+        clickOnVisibleElement(myProfileElement);
 
     }
 
