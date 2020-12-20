@@ -21,6 +21,24 @@ public interface ServerConfig extends Config {
     @Key("password")
     String password();
 
+    @Key("latinName")
+    String latinName();
+
+    @Key("latinLastName")
+    String latinLastName();
+
+    @Key("blogName")
+    String blogName();
+
+    @Key("birthdate")
+    String birthdate ();
+
+    @Key("viberNumber")
+    String viberNumber();
+
+    @Key("VKcontactInfo")
+    String VKcontactInfo();
+
 
 
 
