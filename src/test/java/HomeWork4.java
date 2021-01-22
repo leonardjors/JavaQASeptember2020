@@ -79,8 +79,33 @@ public class HomeWork4 {
 
         //Сохраняет заполненые личные данные
         myProfilePage.savePersonalInfo();
+
+        //Удаляет cookies
+        clearUpCookies(driver);
+
+
     }
 
+
+    @Test
+    public void validatePersonalInfo(){
+        //Открывает главную страницу Otus
+        MainPage mainPage = new MainPage(driver);
+
+        //Логинит юзера
+        mainPage.loginUser();
+
+        //Открывает профиль пользователя
+        mainPage.openMyProfile();
+
+        //Передает driver в MyProfile class
+        MyProfilePage myProfilePage = new MyProfilePage(driver);
+
+        myProfilePage.getLatinName();
+
+        
+
+    }
 
     @After
 
@@ -91,5 +116,10 @@ public class HomeWork4 {
             driver.quit();
         }
 
+    }
+
+    private void clearUpCookies(WebDriver driver) {
+        driver.manage().deleteAllCookies();
+        logger.info("Cookies deleted");
     }
 }
