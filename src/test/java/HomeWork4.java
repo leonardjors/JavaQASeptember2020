@@ -10,13 +10,16 @@ import org.openqa.selenium.WebDriver;
 import pages.MainPage;
 import pages.MyProfilePage;
 
-
 public class HomeWork4 {
     private WebDriver driver;
 
     private Logger logger = LogManager.getLogger(HomeWork4.class);
     private ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
-
+    private String  latinName = "Bob";
+    private String latinLastName = "Kiwi";
+    private String blogName = "Bob22";
+    private String viberNumber = "777755555";
+    private String VKcontactInfo = "blblblbl";
     @Before
 
     public void setUp() {
@@ -51,13 +54,13 @@ public class HomeWork4 {
         MyProfilePage myProfilePage = new MyProfilePage(driver);
 
         //Заполняет "имя" латиницей
-        myProfilePage.fillInLatinName();
+        myProfilePage.fillInLatinName(latinName);
 
         //Заполняет "фамилию" латиницей
-        myProfilePage.fillInLatinLastName();
+        myProfilePage.fillInLatinLastName(latinLastName);
 
         //Заполняет поле "имя в блоге"
-        myProfilePage.fillInBlogName();
+        myProfilePage.fillInBlogName(blogName);
 
 //        //Запонляет поле "Дата рождения"
 //        myProfilePage.fillInBirthdate();
@@ -66,10 +69,10 @@ public class HomeWork4 {
         myProfilePage.scrollToContactInfo();
 
         //Добавляет "Viber" контакт
-        myProfilePage.addViberContactInfo();
+        myProfilePage.addViberContactInfo(viberNumber);
 
         //Добавляет "VK" контакт
-        myProfilePage.addVKContactInfo();
+        myProfilePage.addVKContactInfo(VKcontactInfo);
 
         //Скроллит до элемента "Cохранить"
         myProfilePage.scrollToSaveButton();
