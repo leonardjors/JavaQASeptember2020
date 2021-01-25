@@ -10,16 +10,19 @@ import org.openqa.selenium.WebDriver;
 import pages.MainPage;
 import pages.MyProfilePage;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class HomeWork4 {
     private WebDriver driver;
 
     private Logger logger = LogManager.getLogger(HomeWork4.class);
     private ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
-    private String  latinName = "Bob";
+    private String latinName = "Bob";
     private String latinLastName = "Kiwi";
     private String blogName = "Bob22";
     private String viberNumber = "777755555";
     private String VKcontactInfo = "blblblbl";
+
     @Before
 
     public void setUp() {
@@ -38,7 +41,7 @@ public class HomeWork4 {
 
 
     @Test
-    public void otusTestLogin() throws InterruptedException {
+    public void testIfDataIsSavedCorrectly() throws InterruptedException {
         MainPage mainPage = new MainPage(driver);
 
         //Открывает главную страницу Otus
@@ -83,14 +86,43 @@ public class HomeWork4 {
         //Удаляет cookies
         clearUpCookies(driver);
 
+        mainPage = new MainPage(driver);
+
+        mainPage.openMainPage();
+
+        //Логинит юзера
+        mainPage.loginUser();
+
+        //Открывает профиль пользователя
+        mainPage.openMyProfile();
+
+        //Передает driver в MyProfile class
+        myProfilePage = new MyProfilePage(driver);
+
+        System.out.println(myProfilePage.getLatinName());
+
+        assertThat(myProfilePage.getLatinName()).isEqualTo(latinName);
+
+        assertThat(myProfilePage.getLatinLastName()).isEqualTo(latinLastName);
+
+        assertThat(myProfilePage.getBlogName()).isEqualTo(blogName);
+
+        assertThat(myProfilePage.getViberContactInfo()).isEqualTo(viberNumber);
+
+        assertThat(myProfilePage.getVKContactInfo()).isEqualTo(VKcontactInfo);
+
+        logger.info("Данные провалидированы");
+
 
     }
 
 
-    @Test
-    public void validatePersonalInfo(){
+    /*@Test
+    public void validatePersonalInfo() {
         //Открывает главную страницу Otus
         MainPage mainPage = new MainPage(driver);
+
+        mainPage.openMainPage();
 
         //Логинит юзера
         mainPage.loginUser();
@@ -101,15 +133,18 @@ public class HomeWork4 {
         //Передает driver в MyProfile class
         MyProfilePage myProfilePage = new MyProfilePage(driver);
 
-        myProfilePage.getLatinName();
+        System.out.println(myProfilePage.getLatinName());
 
-        
+        assertThat(myProfilePage.getLatinName()).isEqualTo(latinName);
 
-    }
+
+    }*/
 
     @After
 
     public void tearDown() {
+
+
         logger.info("Тест завершился");
 
         if (driver != null) {

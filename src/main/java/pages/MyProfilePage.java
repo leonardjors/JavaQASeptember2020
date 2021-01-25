@@ -42,19 +42,29 @@ public class MyProfilePage {
 
     }
 
-    public void  getLatinName() {
-        driver.findElement(latinNameElement).getAttribute("value");
+    public String getLatinName() {
+        return driver.findElement(latinNameElement).getAttribute("value");
+
 
     }
 
-    public void fillInLatinLastName(String latinLastName ) {
+    public void clearLatinName() {
+        driver.findElement(latinNameElement).clear();
+
+    }
+
+    public void fillInLatinLastName(String latinLastName) {
         clickOnVisibleElement(latinLastNameElement);
         driver.findElement(latinLastNameElement).sendKeys(latinLastName);
         logger.info("Добавлена фамилия латиницей");
     }
 
-    public void getLatinLastName(){
-        driver.findElement(latinLastNameElement).getAttribute("value");
+    public String getLatinLastName() {
+        return driver.findElement(latinLastNameElement).getAttribute("value");
+    }
+
+    public void clearLatinLastName() {
+        driver.findElement(latinLastNameElement).clear();
     }
 
     public void fillInBlogName(String blogName) {
@@ -63,11 +73,13 @@ public class MyProfilePage {
         logger.info("Добавлено имя в блоге");
     }
 
-    public void getBlogName(){
-        driver.findElement(blogNameElement).getAttribute("value");
+    public String getBlogName() {
+        return driver.findElement(blogNameElement).getAttribute("value");
     }
 
-
+    public void clearBlogName() {
+        driver.findElement(blogNameElement).clear();
+    }
 
     public void addViberContactInfo(String viberNumber) {
 
@@ -79,8 +91,8 @@ public class MyProfilePage {
         logger.info("Добавлен контакт \\viber\\");
     }
 
-    public void getViberContactInfo(){
-        driver.findElement(viberInputFieldElement).getAttribute("value");
+    public String getViberContactInfo() {
+        return driver.findElement(viberInputFieldElement).getAttribute("value");
     }
 
     public void addVKContactInfo(String vkContactInfo) {
@@ -92,8 +104,8 @@ public class MyProfilePage {
         logger.info("Добавлен контакт \\VK\\");
     }
 
-    public void getVKContactInfo(){
-        driver.findElement(vkInputFieldElement).getAttribute("value");
+    public String getVKContactInfo() {
+        return driver.findElement(vkInputFieldElement).getAttribute("value");
     }
 
     public void savePersonalInfo() {
@@ -135,7 +147,6 @@ public class MyProfilePage {
         waitFor(ExpectedConditions.visibilityOfElementLocated(locator),
                 (timeout.length > 0 ? timeout[0] : null));
     }
-
 
 
     public void waitElementIsNotDisplayed(WebElement locator) {
