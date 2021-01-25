@@ -12,9 +12,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MainPage {
-    private ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
-    private WebDriver driver;
-    private Logger logger = LogManager.getLogger(MainPage.class);
+    private final ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
+    private final WebDriver driver;
+    private final Logger logger = LogManager.getLogger(MainPage.class);
     String baseURL = cfg.otusURL();
     String username = cfg.username();
     String password = cfg.password();

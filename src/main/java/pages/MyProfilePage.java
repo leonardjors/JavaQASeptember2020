@@ -11,15 +11,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MyProfilePage {
-    private WebDriver driver;
-    private Logger logger = LogManager.getLogger(pages.MyProfilePage.class);
+    private final WebDriver driver;
+    private final Logger logger = LogManager.getLogger(pages.MyProfilePage.class);
 
     By latinNameElement = By.cssSelector("#id_fname_latin");
     By latinLastNameElement = By.cssSelector("#id_lname_latin");
     By blogNameElement = By.cssSelector("#id_blog_name");
-    By birthdateElement = By.cssSelector("input[name='date_of_birth']");
     By addButtonElement1 = By.xpath("//button[contains(text(),'Добавить')]");
-    By addButtonElement2 = By.cssSelector(".js-formset > .js-formset-add.js-lk-cv-custom-select-add.lk-cv-block__action.lk-cv-block__action_md-no-spacing");
     By contactOptionDropDownElement1 = By.cssSelector(".input_straight-bottom-right");
     By viberElementFromDropDown = By.cssSelector("button[title='Viber']");
     By viberInputFieldElement = By.cssSelector("input#id_contact-0-value");
@@ -104,7 +102,7 @@ public class MyProfilePage {
 
     public void addVKContactInfo(String vkContactInfo) {
 
-        //clickOnVisibleElement(addButtonElement2);
+
         clickOnVisibleElement(contactOptionDropDownElement2);
         clickOnVisibleElement(vkElementFromDropDown);
         driver.findElement(vkInputFieldElement).sendKeys(vkContactInfo);
@@ -168,7 +166,6 @@ public class MyProfilePage {
         waitFor(ExpectedConditions.visibilityOfElementLocated(locator),
                 (timeout.length > 0 ? timeout[0] : null));
     }
-
 
 
 }
