@@ -27,6 +27,8 @@ public class MyProfilePage {
     By vkElementFromDropDown = By.cssSelector(".js-formset > div > div:nth-of-type(2) .js-lk-cv-custom-select.lk-cv-block__input.lk-cv-block__input_3.lk-cv-block__input_md-4.select button[title='VK']");
     By vkInputFieldElement = By.cssSelector("[data-num='1'] [class='input input_straight-top-left input_straight-bottom-left lk-cv-block__input lk-cv-block__input_9 lk-cv-block__input_md-8']");
     By saveButtonElement = By.cssSelector("button[name='continue']");
+    By deleteButton1 = By.cssSelector("div.body-wrapper:nth-child(2) div.body.drawer.body_not-subscribed.drawer--right div.js-lk-cv:nth-child(8) div.container.container-padding-bottom div.container__row div.container__col.container__col_9.container__col_md-8.container__col_sm-12.container__col_border-left.lk-rightbar.print-block.print-wide:nth-child(2) div.container-padding-bottom div.container__row:nth-child(2) div.container__col.container__col_12:nth-child(3) div.lk-cv-block:nth-child(2) div.js-formset div.lk-cv-block__line.js-formset-items:nth-child(5) div.container__row.js-formset-row:nth-child(1) div.container__col.container__col_12.container__col_md-0:nth-child(4) div.lk-cv-block__input-alignment > button.lk-cv-block__action.lk-cv-block__action_md-no-spacing.js-formset-delete");
+    By deleteButton2 = By.cssSelector("div.body-wrapper:nth-child(2) div.body.drawer.body_not-subscribed.drawer--right div.js-lk-cv:nth-child(8) div.container.container-padding-bottom div.container__row div.container__col.container__col_9.container__col_md-8.container__col_sm-12.container__col_border-left.lk-rightbar.print-block.print-wide:nth-child(2) div.container-padding-bottom div.container__row:nth-child(2) div.container__col.container__col_12:nth-child(3) div.lk-cv-block:nth-child(2) div.js-formset div.lk-cv-block__line.js-formset-items:nth-child(5) div.container__row.js-formset-row:nth-child(2) div.container__col.container__col_12.container__col_md-0:nth-child(4) div.lk-cv-block__input-alignment > button.lk-cv-block__action.lk-cv-block__action_md-no-spacing.js-formset-delete");
 
 
     public MyProfilePage(WebDriver driver) {
@@ -95,6 +97,11 @@ public class MyProfilePage {
         return driver.findElement(viberInputFieldElement).getAttribute("value");
     }
 
+    public void deleteViberContact() {
+        driver.findElement(deleteButton1).click();
+        logger.info("");
+    }
+
     public void addVKContactInfo(String vkContactInfo) {
 
         //clickOnVisibleElement(addButtonElement2);
@@ -106,6 +113,11 @@ public class MyProfilePage {
 
     public String getVKContactInfo() {
         return driver.findElement(vkInputFieldElement).getAttribute("value");
+    }
+
+    public void deleteVKContact() {
+        driver.findElement(deleteButton2).click();
+        logger.info("Ранее заполненные поля - очищены");
     }
 
     public void savePersonalInfo() {
@@ -123,6 +135,14 @@ public class MyProfilePage {
 
     }
 
+    public void scrollToContactInfoToDelete() {
+        WebElement webElement = driver.findElement(By.xpath("//p[contains(text(),'Телефон *')]"));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", webElement);
+
+
+    }
+
     public void scrollToSaveButton() {
         WebElement webElement = driver.findElement(saveButtonElement);
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -130,6 +150,7 @@ public class MyProfilePage {
 
 
     }
+
 
     public void clickOnVisibleElement(By locator) {
         waitElementIsDisplayed(locator);
@@ -148,12 +169,6 @@ public class MyProfilePage {
                 (timeout.length > 0 ? timeout[0] : null));
     }
 
-
-    public void waitElementIsNotDisplayed(WebElement locator) {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.invisibilityOf(locator));
-
-    }
 
 
 }

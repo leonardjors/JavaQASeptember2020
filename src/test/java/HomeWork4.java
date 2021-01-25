@@ -1,6 +1,4 @@
-import config.ServerConfig;
 import config.WebDriverFactory;
-import org.aeonbits.owner.ConfigFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.After;
@@ -10,18 +8,17 @@ import org.openqa.selenium.WebDriver;
 import pages.MainPage;
 import pages.MyProfilePage;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class HomeWork4 {
     private WebDriver driver;
 
-    private Logger logger = LogManager.getLogger(HomeWork4.class);
-    private ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
-    private String latinName = "Bob";
-    private String latinLastName = "Kiwi";
-    private String blogName = "Bob22";
-    private String viberNumber = "777755555";
-    private String VKcontactInfo = "blblblbl";
+    private final Logger logger = LogManager.getLogger(HomeWork4.class);
+    private final String latinName = "Bob";
+    private final String latinLastName = "Kiwi";
+    private final String blogName = "Bob22";
+    private final String viberNumber = "777755555";
+    private final String VKcontactInfo = "blblblbl";
 
     @Before
 
@@ -65,9 +62,6 @@ public class HomeWork4 {
         //Заполняет поле "имя в блоге"
         myProfilePage.fillInBlogName(blogName);
 
-//        //Запонляет поле "Дата рождения"
-//        myProfilePage.fillInBirthdate();
-//        Thread.sleep(3000);
         //Cкроллит до секции "Контактная информация"
         myProfilePage.scrollToContactInfo();
 
@@ -113,32 +107,24 @@ public class HomeWork4 {
 
         logger.info("Данные провалидированы");
 
+        myProfilePage.clearLatinName();
+
+        myProfilePage.clearLatinLastName();
+
+        myProfilePage.clearBlogName();
+
+        myProfilePage.scrollToContactInfoToDelete();
+
+        myProfilePage.deleteViberContact();
+
+        myProfilePage.deleteVKContact();
+
+        myProfilePage.scrollToSaveButton();
+
+        myProfilePage.savePersonalInfo();
 
     }
 
-
-    /*@Test
-    public void validatePersonalInfo() {
-        //Открывает главную страницу Otus
-        MainPage mainPage = new MainPage(driver);
-
-        mainPage.openMainPage();
-
-        //Логинит юзера
-        mainPage.loginUser();
-
-        //Открывает профиль пользователя
-        mainPage.openMyProfile();
-
-        //Передает driver в MyProfile class
-        MyProfilePage myProfilePage = new MyProfilePage(driver);
-
-        System.out.println(myProfilePage.getLatinName());
-
-        assertThat(myProfilePage.getLatinName()).isEqualTo(latinName);
-
-
-    }*/
 
     @After
 
